@@ -1,0 +1,154 @@
+{% extends 'base.html '%}
+
+{% load static %}
+
+
+	<!-- END #fh5co-header -->
+
+
+{% block title %}
+	Django The Future
+{% endblock %}
+
+
+{% block stylesheet %}
+	
+<style>
+	#wrapper{
+		width: 900px;
+		height: 500px;
+		
+		margin-top: 200px;
+		margin-left: 250px;
+		padding-top: 20px;
+		text-align: center;
+		box-shadow: 0px 0px 10px 20px magenta;
+	}
+
+	.box{
+		width: 350px;
+		height: 350px;
+		border: thin black solid;
+		margin-top: 50px;
+		display: inline-block;
+		transition: 1s;
+	}
+
+	.box:hover{
+		transform: scale(1.1);
+	}
+
+	#one{
+		
+		background-image: url(static/images/add.jpg);
+		background-size: cover;
+	}
+
+	#two{
+		margin-left: 20px;
+
+		
+		background-image: url(static/images/display.jpg);
+		background-size: cover;
+		
+	}
+
+	
+</style>
+
+{% endblock %}
+
+{% block profile %}
+
+	{% if request.user.is_authenticated %}
+    	<div class="fh5co-bio">
+			<figure>
+				<img src="{{ user.profile_picture.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			</figure>
+
+			<h3 class="heading">About Me</h3>
+
+			<h2>{{ user.name }}</h2>
+
+			
+			<ul class="fh5co-social">
+				<li><a href="https://github.com/sohag-aust"><i class="icon-github"></i></a></li>
+				<li><a href="#"><i class="icon-facebook"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/ashraful-islam-2a74b4141/"><i class="icon-linkedin"></i></a></li>
+			</ul>
+
+		</div>
+
+	{% else %}
+		
+		<div class="fh5co-bio">
+			<figure>
+				<img src="{% static 'images/myTODO.jpg' %}" alt="Image Missing" class="img-responsive">
+			</figure>
+
+			<h3 class="heading"><b>TODO Application</b></h3>
+
+		</div>
+	
+	{% endif %}
+
+
+{% endblock %}
+
+
+{% block content %}
+
+	<!-- hover ta kaj korbe jokhon login korbo tokhon -->
+
+	<div id="wrapper">
+
+		{% if request.user.is_authenticated %}
+
+			{% if author_profile %}
+				<a href="{% url 'create' %}">
+					<div id="one" class="box">
+					
+					</div>
+				</a>
+			
+			{% else %}
+				<a href="{% url 'profile' %}">
+					<div id="one" class="box">
+					
+					</div>
+				</a>
+
+			{% endif %}
+			
+
+			<a href="{% url 'profile' %}">		
+				<div id="two" class="box">
+					
+				</div>
+			</a>
+
+		{% else %}
+			<a href="">
+				<div id="one" class="box">
+				
+				</div>
+			</a>
+			
+
+			<a href="">		
+				<div id="two" class="box">
+					
+				</div>
+			</a>
+		{% endif %}
+			
+
+	</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+		
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+
+    <style type="text/css">
+		#fh5co-offcanvas {
+    	width: auto;
+	}
+
+#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
+    	width: auto;
+    	padding: 50px;
+	}
+	</style>
+	
+{% endblock %}
+
+
+
+{% block stylesheet %}
+
+{% endblock %}
+
+
+{% block profile %}
+
+    	<div class="fh5co-bio">
+			<figure>
+				<img src="{{ auth.profile_picture.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			</figure>
+
+			<h3 class="heading">About Me</h3>
+
+			<h2>{{ auth.name }}</h2>
+
+			
+			
+			<ul class="fh5co-social">
+				<li><a href="#"><i class="icon-twitter"></i></a></li>
+				<li><a href="#"><i class="icon-facebook"></i></a></li>
+				<li><a href="#"><i class="icon-instagram"></i></a></li>
+			</ul>
+
+		</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+		<h2>Author Name: {{ auth.name }}</h2>
+
+		{% for p in posts %} <!-- context er moddhe theke jei nam e pathaici oi na ta iterable -->
+
+			<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+				<figure>
+					
+				</figure>
+				<h1>{{ p.item }}</h1>
+				
+				<h1>{{ p.Date }}</h1>
+			</article>
+		{% endfor %}
+
+{% endblock %}
+
+
+{% block script %}
+
+{% endblock %}

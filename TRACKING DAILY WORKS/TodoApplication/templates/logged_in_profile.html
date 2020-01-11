@@ -1,0 +1,132 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+
+        <div class=container>
+            
+            <h3>Today: &nbsp; {{ date }} <h3>  
+        </div>
+
+        <br/> <br/>
+
+        {% if posts %}
+
+        <div class=container>
+            <h4>Upcoming To-do's<h4>
+        </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tasks</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col"><center>Completion</center></th>
+                        <th scope="col"><center>Delete</center></th>
+                    </tr>
+                </thead>
+
+                {% for things in posts %}
+                    
+                    {% if not things.completed and things.Date > date %}
+
+                        <tbody>
+                            <tr class="table-success">
+                                <td>{{ things.item }}</td>
+                                <td>{{ things.Date }}</td>
+                                
+                                <td><center><button class="btn btn-warning"><a href="{% url 'complete' things.id %}"> <b>Complete</b> </a></button></center></td>
+                                <td><center><button class="btn btn-danger"><a href="{% url 'delete' things.id %}"> <b>Delete</b> </a></button></center></td>                
+                            </tr>
+                        
+                        </tbody>
+
+                    {% endif %}
+                        
+                {% endfor %}
+
+            </table>
+            
+        {% endif %}
+
+        <br/><br/><br/>
+
+        {% if posts %}
+
+        <div class=container>
+            <h4> Completed To-do's <h4>    
+        </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tasks</th>
+                        <th scope="col">Deadline</th>
+                    </tr>
+                </thead>
+
+                {% for things in posts %}
+                    {% if things.completed %}
+
+                        <tbody>
+                            <tr class="table-danger">
+                                <td>{{ things.item }}</td>
+                                <td>{{ things.Date }}</td>
+                            </tr>        
+                        </tbody>
+
+                    {% endif %}
+                        
+                {% endfor %}
+                
+            </table>
+
+        {% endif %}
+
+        <br/><br/><br/>
+
+        {% if posts %}
+
+        <div class=container>
+            <h4> Failed To-do's <h4>
+        </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tasks</th>
+                        <th scope="col">Deadline</th>
+                    </tr>
+                </thead>
+
+                {% for things in posts %}
+                    
+                    {% if things.Date < date %}
+
+                        <tbody>
+                            <tr class="table-warning">
+                                <td>{{ things.item }}</td>
+                                <td>{{ things.Date }}</td>
+                            </tr>
+                        </tbody>
+
+                    {% endif %}
+
+                {% endfor %}
+                
+            </table>
+
+        {% endif %}
+
+        
+
+        <!-- FROM HERE -->
+
+        
+
+
+{% endblock %}
+
+
+{% block script %}
+
+{% endblock %}
